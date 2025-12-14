@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="22%" style="stop-color:#cfc09f;stop-opacity:1" />
+      <stop offset="24%" style="stop-color:#634f2c;stop-opacity:1" />
+      <stop offset="26%" style="stop-color:#cfc09f;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#ffecb3;stop-opacity:1" />
+      <stop offset="78%" style="stop-color:#3a2c0f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" fill="#2b1d1d"/>
+  <text x="50" y="65" font-family="Cinzel, serif" font-size="60" font-weight="700" fill="url(#goldGradient)" text-anchor="middle">V</text>
+</svg>
