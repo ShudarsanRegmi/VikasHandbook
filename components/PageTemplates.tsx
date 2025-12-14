@@ -240,100 +240,140 @@ export const GalleryTemplate: React.FC<{ content: PageContent }> = ({ content })
           </div>
         )}
         
-        {/* Style 3: Nature & Adventure */}
+        {/* Style 3: Geometric Doodles & Hand-drawn Lines */}
         {decorStyle === 'nature' && (
           <div className="absolute inset-0 pointer-events-none">
-            {/* Leaves */}
-            <div className="absolute top-16 right-16 text-2xl text-green-500 opacity-50 rotate-45">🍃</div>
-            <div className="absolute bottom-20 left-12 text-xl text-green-400 opacity-45 -rotate-12">🍃</div>
-            <div className="absolute top-1/3 left-8 text-lg text-emerald-400 opacity-40">🌿</div>
-            <div className="absolute bottom-1/3 right-20 text-xl text-green-500 opacity-45">🌿</div>
+            {/* Hand-drawn circles */}
+            <svg className="absolute top-16 right-16 w-16 h-16 opacity-40" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="25" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="5,3"/>
+            </svg>
+            <svg className="absolute bottom-24 left-12 w-12 h-12 opacity-35" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="20" fill="none" stroke="#a78bfa" strokeWidth="1.5"/>
+            </svg>
+            <svg className="absolute top-1/2 right-8 w-10 h-10 opacity-30" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="22" fill="none" stroke="#67e8f9" strokeWidth="2" strokeDasharray="8,4"/>
+            </svg>
             
-            {/* Trees & Plants */}
-            <div className="absolute top-20 left-20 text-2xl opacity-45">🌲</div>
-            <div className="absolute bottom-16 right-16 text-xl opacity-40 rotate-6">🌳</div>
-            <div className="absolute top-2/3 left-12 text-lg opacity-40">🌴</div>
+            {/* Triangles */}
+            <svg className="absolute top-24 left-20 w-14 h-14 opacity-40" viewBox="0 0 60 60">
+              <polygon points="30,5 55,50 5,50" fill="none" stroke="#fb923c" strokeWidth="1.5"/>
+            </svg>
+            <svg className="absolute bottom-20 right-24 w-10 h-10 opacity-35 rotate-45" viewBox="0 0 60 60">
+              <polygon points="30,5 55,50 5,50" fill="none" stroke="#a78bfa" strokeWidth="1.5"/>
+            </svg>
             
-            {/* Birds */}
-            <div className="absolute top-12 right-1/4 text-xl opacity-50">🐦</div>
-            <div className="absolute bottom-28 left-1/3 text-lg opacity-45 -rotate-12">🕊️</div>
-            <div className="absolute top-1/2 right-8 text-sm opacity-40">🐦</div>
+            {/* Zigzag lines */}
+            <svg className="absolute top-12 left-1/3 w-24 h-6 opacity-35" viewBox="0 0 100 20">
+              <polyline points="0,10 15,2 30,18 45,2 60,18 75,2 90,18 100,10" fill="none" stroke="#94a3b8" strokeWidth="1.5"/>
+            </svg>
+            <svg className="absolute bottom-16 right-1/4 w-20 h-5 opacity-30" viewBox="0 0 100 20">
+              <polyline points="0,10 15,2 30,18 45,2 60,18 75,2 90,18 100,10" fill="none" stroke="#67e8f9" strokeWidth="1.5"/>
+            </svg>
             
-            {/* Sun & Clouds */}
-            <div className="absolute top-8 left-1/4 text-2xl opacity-50">☀️</div>
-            <div className="absolute top-24 right-28 text-xl opacity-40">☁️</div>
-            <div className="absolute bottom-12 left-16 text-lg opacity-35">☁️</div>
+            {/* Squiggly lines */}
+            <svg className="absolute top-1/3 right-12 w-16 h-20 opacity-35" viewBox="0 0 40 60">
+              <path d="M20 0 Q35 15 20 30 Q5 45 20 60" fill="none" stroke="#fb923c" strokeWidth="1.5"/>
+            </svg>
+            <svg className="absolute bottom-1/3 left-8 w-12 h-16 opacity-30" viewBox="0 0 40 60">
+              <path d="M20 0 Q35 15 20 30 Q5 45 20 60" fill="none" stroke="#a78bfa" strokeWidth="1.5"/>
+            </svg>
             
-            {/* Mountains & Nature */}
-            <div className="absolute bottom-24 right-1/4 text-xl opacity-45">⛰️</div>
-            <div className="absolute top-1/4 left-1/4 text-lg opacity-40">🏕️</div>
+            {/* Dotted squares */}
+            <svg className="absolute top-32 left-1/4 w-12 h-12 opacity-35 rotate-12" viewBox="0 0 50 50">
+              <rect x="5" y="5" width="40" height="40" fill="none" stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="4,4"/>
+            </svg>
+            <svg className="absolute bottom-36 right-1/3 w-10 h-10 opacity-30 -rotate-6" viewBox="0 0 50 50">
+              <rect x="5" y="5" width="40" height="40" fill="none" stroke="#67e8f9" strokeWidth="1.5" strokeDasharray="3,3"/>
+            </svg>
             
-            {/* Rainbow */}
-            <div className="absolute top-32 right-12 text-2xl opacity-40">🌈</div>
+            {/* X marks */}
+            <div className="absolute top-20 right-1/3 text-2xl text-slate-400 opacity-40 font-light">×</div>
+            <div className="absolute bottom-28 left-1/4 text-xl text-violet-300 opacity-35 font-light">×</div>
+            <div className="absolute top-2/3 right-20 text-lg text-cyan-300 opacity-30 font-light">×</div>
             
-            {/* Green dots like dewdrops */}
-            <div className="absolute top-40 left-1/4 w-2.5 h-2.5 bg-green-300 rounded-full opacity-45" />
-            <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-emerald-200 rounded-full opacity-40" />
-            <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-green-200 rounded-full opacity-50" />
+            {/* Plus signs */}
+            <div className="absolute top-40 left-16 text-2xl text-orange-300 opacity-40 font-light">+</div>
+            <div className="absolute bottom-1/4 right-12 text-xl text-slate-400 opacity-35 font-light">+</div>
+            <div className="absolute top-1/4 left-1/3 text-lg text-violet-300 opacity-30 font-light">+</div>
             
-            {/* Green corners */}
-            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-green-200 opacity-50" />
-            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-green-200 opacity-50" />
-            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-green-200 opacity-50" />
-            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-green-200 opacity-50" />
+            {/* Small dots pattern */}
+            <div className="absolute top-44 right-1/4 w-2 h-2 bg-slate-300 rounded-full opacity-50" />
+            <div className="absolute top-48 right-28 w-1.5 h-1.5 bg-violet-300 rounded-full opacity-45" />
+            <div className="absolute bottom-40 left-20 w-2 h-2 bg-cyan-300 rounded-full opacity-40" />
+            <div className="absolute bottom-44 left-28 w-1.5 h-1.5 bg-orange-300 rounded-full opacity-45" />
+            
+            {/* Colorful corners */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-slate-300 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-violet-200 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-cyan-200 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-orange-200 opacity-50" />
           </div>
         )}
         
-        {/* Style 4: Fun Stickers & Doodles */}
+        {/* Style 4: Vintage Scrapbook - Paper clips, stamps, postmarks */}
         {decorStyle === 'stickers' && (
           <div className="absolute inset-0 pointer-events-none">
-            {/* Fun emoji stickers */}
-            <div className="absolute top-16 right-16 text-2xl opacity-55 rotate-12">😎</div>
-            <div className="absolute bottom-20 left-12 text-xl opacity-50 -rotate-6">🎉</div>
-            <div className="absolute top-1/3 left-16 text-2xl opacity-50">🎊</div>
-            <div className="absolute bottom-1/3 right-20 text-xl opacity-45">🥳</div>
+            {/* Paper clips */}
+            <svg className="absolute top-12 right-16 w-8 h-16 opacity-50" viewBox="0 0 30 60">
+              <path d="M15 5 L15 45 Q15 55 5 55 Q-5 55 5 45 L5 20 Q5 10 15 10" fill="none" stroke="#78716c" strokeWidth="2"/>
+            </svg>
+            <svg className="absolute bottom-16 left-12 w-6 h-12 opacity-45 rotate-[-20deg]" viewBox="0 0 30 60">
+              <path d="M15 5 L15 45 Q15 55 5 55 Q-5 55 5 45 L5 20 Q5 10 15 10" fill="none" stroke="#a8a29e" strokeWidth="2"/>
+            </svg>
+            <svg className="absolute top-1/2 right-6 w-5 h-10 opacity-40 rotate-12" viewBox="0 0 30 60">
+              <path d="M15 5 L15 45 Q15 55 5 55 Q-5 55 5 45 L5 20 Q5 10 15 10" fill="none" stroke="#78716c" strokeWidth="2"/>
+            </svg>
             
-            {/* Music & Fun */}
-            <div className="absolute top-24 left-24 text-xl opacity-50">🎵</div>
-            <div className="absolute bottom-28 right-24 text-lg opacity-45">🎶</div>
-            <div className="absolute top-1/2 right-12 text-xl opacity-45">🎤</div>
+            {/* Postage stamps */}
+            <div className="absolute top-20 left-20 w-14 h-16 border-2 border-dashed border-stone-300 bg-amber-50/60 flex items-center justify-center opacity-50">
+              <div className="text-xs text-stone-400 font-mono">2024</div>
+            </div>
+            <div className="absolute bottom-24 right-20 w-12 h-14 border-2 border-dashed border-stone-300 bg-rose-50/50 flex items-center justify-center opacity-45 rotate-6">
+              <div className="text-xs text-stone-400">❦</div>
+            </div>
             
-            {/* Cool stickers */}
-            <div className="absolute top-12 right-1/3 text-2xl opacity-50">✌️</div>
-            <div className="absolute bottom-16 left-1/4 text-xl opacity-45">👍</div>
-            <div className="absolute top-2/3 left-8 text-lg opacity-40">💪</div>
+            {/* Postmark circles */}
+            <svg className="absolute top-28 right-1/4 w-16 h-16 opacity-30" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="25" fill="none" stroke="#78716c" strokeWidth="1"/>
+              <circle cx="30" cy="30" r="20" fill="none" stroke="#78716c" strokeWidth="0.5"/>
+              <line x1="5" y1="30" x2="55" y2="30" stroke="#78716c" strokeWidth="0.5"/>
+            </svg>
+            <svg className="absolute bottom-1/3 left-16 w-12 h-12 opacity-25 rotate-[-15deg]" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="25" fill="none" stroke="#a8a29e" strokeWidth="1"/>
+              <circle cx="30" cy="30" r="20" fill="none" stroke="#a8a29e" strokeWidth="0.5"/>
+            </svg>
             
-            {/* Fun elements */}
-            <div className="absolute top-20 left-1/4 text-xl opacity-45">🎈</div>
-            <div className="absolute bottom-24 right-1/3 text-2xl opacity-50">🎁</div>
-            <div className="absolute top-1/4 right-12 text-lg opacity-40">🏆</div>
+            {/* Washi tape strips - varied */}
+            <div className="absolute top-8 left-1/4 w-20 h-5 bg-gradient-to-r from-amber-100 to-amber-200 opacity-50 rotate-[-3deg] rounded-sm shadow-sm" />
+            <div className="absolute bottom-12 right-1/4 w-16 h-4 bg-gradient-to-r from-stone-100 to-stone-200 opacity-45 rotate-[5deg] rounded-sm shadow-sm" />
+            <div className="absolute top-1/3 left-6 w-14 h-4 bg-gradient-to-r from-rose-100 to-rose-200 opacity-40 rotate-[-8deg] rounded-sm shadow-sm" />
             
-            {/* Stars & Lightning */}
-            <div className="absolute top-36 right-20 text-xl opacity-50">⚡</div>
-            <div className="absolute bottom-40 left-20 text-lg opacity-45">💥</div>
-            <div className="absolute top-1/2 left-1/3 text-xl opacity-40">🔥</div>
+            {/* Torn paper edges */}
+            <div className="absolute top-16 left-1/3 w-16 h-8 bg-stone-100 opacity-40 rotate-3" style={{clipPath: 'polygon(0 0, 100% 10%, 95% 100%, 5% 90%)'}} />
+            <div className="absolute bottom-20 right-1/3 w-12 h-6 bg-amber-50 opacity-35 -rotate-2" style={{clipPath: 'polygon(5% 0, 95% 5%, 100% 100%, 0 95%)'}} />
             
-            {/* Hearts & Love */}
-            <div className="absolute bottom-12 right-16 text-xl opacity-45">💖</div>
-            <div className="absolute top-28 left-12 text-lg opacity-40">💝</div>
+            {/* String/twine decoration */}
+            <svg className="absolute top-1/4 right-8 w-20 h-32 opacity-25" viewBox="0 0 40 80">
+              <path d="M20 0 Q30 20 20 40 Q10 60 20 80" fill="none" stroke="#a8a29e" strokeWidth="1" strokeDasharray="4,2"/>
+            </svg>
             
-            {/* Colorful confetti */}
-            <div className="absolute top-32 right-1/4 w-3 h-3 bg-blue-300 rounded-full opacity-50" />
-            <div className="absolute top-44 left-1/4 w-2.5 h-2.5 bg-purple-300 rounded-full opacity-45" />
-            <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-teal-200 rounded-full opacity-40" />
-            <div className="absolute bottom-48 left-1/3 w-2 h-2 bg-orange-300 rounded-full opacity-50" />
-            <div className="absolute top-1/2 right-1/4 w-2.5 h-2.5 bg-indigo-200 rounded-full opacity-45" />
+            {/* Decorative pins */}
+            <div className="absolute top-36 right-16 w-3 h-3 bg-red-400 rounded-full opacity-50 shadow-sm" />
+            <div className="absolute top-37 right-16.5 w-1 h-4 bg-stone-400 opacity-40" style={{marginTop: '10px', marginRight: '2px'}} />
             
-            {/* Colorful washi tape */}
-            <div className="absolute top-8 left-1/4 w-16 h-4 bg-blue-200/60 rotate-[-5deg] rounded-sm" />
-            <div className="absolute bottom-10 right-1/4 w-14 h-3.5 bg-purple-200/50 rotate-[8deg] rounded-sm" />
-            <div className="absolute top-1/3 right-6 w-12 h-3 bg-teal-200/40 rotate-[-12deg] rounded-sm" />
+            <div className="absolute bottom-32 left-24 w-2.5 h-2.5 bg-blue-400 rounded-full opacity-45 shadow-sm" />
             
-            {/* Fun corners */}
-            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-blue-200 opacity-50" />
-            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-purple-200 opacity-50" />
-            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-teal-200 opacity-50" />
-            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-orange-200 opacity-50" />
+            {/* Old photo corners */}
+            <div className="absolute top-40 left-1/4 w-4 h-4 border-l-2 border-t-2 border-stone-400 opacity-40" />
+            <div className="absolute top-40 left-32 w-4 h-4 border-r-2 border-t-2 border-stone-400 opacity-40" />
+            <div className="absolute bottom-40 right-1/4 w-4 h-4 border-l-2 border-b-2 border-stone-400 opacity-35" />
+            <div className="absolute bottom-40 right-32 w-4 h-4 border-r-2 border-b-2 border-stone-400 opacity-35" />
+            
+            {/* Vintage corners */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-stone-300 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-stone-300 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-stone-300 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-stone-300 opacity-50" />
           </div>
         )}
 
