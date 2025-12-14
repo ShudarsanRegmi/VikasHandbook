@@ -15,6 +15,18 @@ const preloadImages = (images: string[]) => {
   });
 };
 
+// Fullscreen helper function
+const enterFullscreen = () => {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen().catch(() => {});
+  } else if ((elem as any).webkitRequestFullscreen) {
+    (elem as any).webkitRequestFullscreen();
+  } else if ((elem as any).msRequestFullscreen) {
+    (elem as any).msRequestFullscreen();
+  }
+};
+
 const App: React.FC = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -33,6 +45,10 @@ const App: React.FC = () => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
+    
+    // Try to enter fullscreen on load (most browsers block this without user interaction)
+    enterFullscreen();
+    
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -100,6 +116,8 @@ const App: React.FC = () => {
   };
 
   const handleOpenBook = () => {
+    // Enter fullscreen when user clicks to open the book
+    enterFullscreen();
     playPageTurnSound();
     setIsBookOpen(true);
     setTimeout(() => triggerConfetti(), 500);
@@ -184,6 +202,12 @@ const App: React.FC = () => {
                <h1 className="font-display text-4xl md:text-6xl gold-text mb-6 tracking-wider leading-tight">The Vikas<br/>Handbook</h1>
                <div className="w-32 h-0.5 bg-[#cfc09f] opacity-50 mb-6" />
                <p className="font-heading text-[#cfc09f] italic opacity-80 text-xl">Volume 1</p>
+            </div>
+            
+            {/* Author at bottom */}
+            <div className="absolute bottom-12 left-0 right-0 text-center">
+               <span className="text-[10px] tracking-widest uppercase text-[#a89880] opacity-70">by</span>
+               <p className="font-heading text-sm md:text-base gold-text mt-1">Shudarsan Regmi</p>
             </div>
             
             {/* Spine Highlight */}
