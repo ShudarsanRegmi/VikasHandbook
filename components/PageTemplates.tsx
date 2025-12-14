@@ -134,73 +134,208 @@ export const GalleryTemplate: React.FC<{ content: PageContent }> = ({ content })
     
     const layout = getLayoutClass();
     
+    // Get decoration style based on page id
+    const getDecorationStyle = () => {
+      switch(content.id) {
+        case 'gallery-1': return 'hearts';
+        case 'gallery-2': return 'cosmic';
+        case 'gallery-3': return 'nature';
+        case 'gallery-4': return 'stickers';
+        default: return 'hearts';
+      }
+    };
+    
+    const decorStyle = getDecorationStyle();
+    
     return (
       <div className="h-full flex flex-col px-4 md:px-8 py-4 md:py-8 relative overflow-hidden">
-        {/* Cheerful Scrapbook Decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          
-          {/* Scattered Hearts */}
-          <div className="absolute top-16 right-16 text-2xl text-pink-300 opacity-60 rotate-12">♥</div>
-          <div className="absolute bottom-20 left-12 text-xl text-rose-300 opacity-50 -rotate-6">♥</div>
-          <div className="absolute top-1/3 right-8 text-lg text-pink-200 opacity-40 rotate-[-20deg]">♥</div>
-          
-          {/* Sparkle Stars */}
-          <div className="absolute top-24 left-16 text-2xl text-amber-400 opacity-70">✨</div>
-          <div className="absolute bottom-28 right-14 text-xl text-yellow-400 opacity-60">✨</div>
-          <div className="absolute top-1/2 left-10 text-lg text-amber-300 opacity-50">⭐</div>
-          <div className="absolute bottom-1/3 right-20 text-sm text-yellow-300 opacity-50">✨</div>
-          
-          {/* Decorative Flowers */}
-          <div className="absolute top-20 right-24 text-2xl opacity-50 rotate-12">🌸</div>
-          <div className="absolute bottom-16 left-20 text-xl opacity-45 -rotate-12">🌼</div>
-          <div className="absolute top-2/3 right-12 text-lg opacity-40">🌷</div>
-          
-          {/* Butterflies */}
-          <div className="absolute top-28 left-24 text-xl opacity-50 rotate-[-15deg]">🦋</div>
-          <div className="absolute bottom-24 right-28 text-lg opacity-45 rotate-12">🦋</div>
-          
-          {/* Cute decorative elements */}
-          <div className="absolute top-12 left-1/3 text-lg opacity-40">🎀</div>
-          <div className="absolute bottom-12 right-1/3 text-lg opacity-45 rotate-6">🎀</div>
-          
-          {/* Confetti dots */}
-          <div className="absolute top-32 right-1/4 w-3 h-3 bg-pink-300 rounded-full opacity-50" />
-          <div className="absolute top-40 left-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full opacity-45" />
-          <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-rose-200 rounded-full opacity-40" />
-          <div className="absolute bottom-44 left-1/3 w-2 h-2 bg-yellow-300 rounded-full opacity-50" />
-          <div className="absolute top-1/2 right-1/4 w-2.5 h-2.5 bg-pink-200 rounded-full opacity-45" />
-          <div className="absolute top-2/3 left-20 w-2 h-2 bg-amber-200 rounded-full opacity-40" />
-          
-          {/* Small stars scattered */}
-          <div className="absolute top-36 left-20 text-amber-400 opacity-60 text-sm">★</div>
-          <div className="absolute bottom-40 right-16 text-yellow-400 opacity-55 text-base">★</div>
-          <div className="absolute top-1/4 right-1/3 text-amber-300 opacity-45 text-xs">★</div>
-          <div className="absolute bottom-1/4 left-1/4 text-yellow-300 opacity-50 text-sm">★</div>
-          
-          {/* Washi tape strips */}
-          <div className="absolute top-8 left-1/4 w-16 h-4 bg-pink-200/60 rotate-[-5deg] rounded-sm" />
-          <div className="absolute bottom-10 right-1/4 w-14 h-3.5 bg-amber-200/50 rotate-[8deg] rounded-sm" />
-          <div className="absolute top-1/3 left-8 w-12 h-3 bg-rose-200/40 rotate-[-12deg] rounded-sm" />
-          
-          {/* Decorative swirls */}
-          <svg className="absolute top-16 right-6 w-12 h-12 opacity-30" viewBox="0 0 50 50">
-            <path d="M25 5 Q45 25 25 45 Q5 25 25 5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-pink-400"/>
-          </svg>
-          <svg className="absolute bottom-20 left-6 w-10 h-10 opacity-25 rotate-45" viewBox="0 0 50 50">
-            <path d="M25 5 Q45 25 25 45 Q5 25 25 5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-amber-400"/>
-          </svg>
-          
-          {/* Corner Flourishes */}
-          <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-pink-200 opacity-50" />
-          <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-pink-200 opacity-50" />
-          <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-pink-200 opacity-50" />
-          <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-pink-200 opacity-50" />
-          
-          {/* Floating small hearts */}
-          <div className="absolute top-44 right-20 text-rose-300 opacity-40 text-xs">♡</div>
-          <div className="absolute bottom-32 left-28 text-pink-300 opacity-35 text-sm">♡</div>
-          <div className="absolute top-1/2 left-1/3 text-rose-200 opacity-30 text-xs">♡</div>
-        </div>
+        
+        {/* Style 1: Hearts & Flowers - Romantic/Sweet */}
+        {decorStyle === 'hearts' && (
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Hearts */}
+            <div className="absolute top-16 right-16 text-2xl text-pink-300 opacity-60 rotate-12">♥</div>
+            <div className="absolute bottom-20 left-12 text-xl text-rose-300 opacity-50 -rotate-6">♥</div>
+            <div className="absolute top-1/3 right-8 text-lg text-pink-200 opacity-40 rotate-[-20deg]">♥</div>
+            <div className="absolute top-44 right-20 text-rose-300 opacity-40 text-xs">♡</div>
+            <div className="absolute bottom-32 left-28 text-pink-300 opacity-35 text-sm">♡</div>
+            
+            {/* Flowers */}
+            <div className="absolute top-20 right-24 text-2xl opacity-50 rotate-12">🌸</div>
+            <div className="absolute bottom-16 left-20 text-xl opacity-45 -rotate-12">🌼</div>
+            <div className="absolute top-2/3 right-12 text-lg opacity-40">�</div>
+            <div className="absolute top-12 left-16 text-xl opacity-45">�</div>
+            <div className="absolute bottom-1/3 left-8 text-lg opacity-40 rotate-12">💐</div>
+            
+            {/* Butterflies */}
+            <div className="absolute top-28 left-24 text-xl opacity-50 rotate-[-15deg]">🦋</div>
+            <div className="absolute bottom-24 right-28 text-lg opacity-45 rotate-12">🦋</div>
+            
+            {/* Ribbons */}
+            <div className="absolute top-12 left-1/3 text-lg opacity-40">🎀</div>
+            <div className="absolute bottom-12 right-1/3 text-lg opacity-45 rotate-6">🎀</div>
+            
+            {/* Pink confetti */}
+            <div className="absolute top-32 right-1/4 w-3 h-3 bg-pink-300 rounded-full opacity-50" />
+            <div className="absolute top-40 left-1/4 w-2.5 h-2.5 bg-rose-300 rounded-full opacity-45" />
+            <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-pink-200 rounded-full opacity-40" />
+            
+            {/* Washi tape */}
+            <div className="absolute top-8 left-1/4 w-16 h-4 bg-pink-200/60 rotate-[-5deg] rounded-sm" />
+            <div className="absolute bottom-10 right-1/4 w-14 h-3.5 bg-rose-200/50 rotate-[8deg] rounded-sm" />
+            
+            {/* Corner flourishes */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-pink-200 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-pink-200 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-pink-200 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-pink-200 opacity-50" />
+          </div>
+        )}
+        
+        {/* Style 2: Cosmic - Stars & Sparkles */}
+        {decorStyle === 'cosmic' && (
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Big sparkles */}
+            <div className="absolute top-16 right-12 text-3xl text-amber-400 opacity-70">✨</div>
+            <div className="absolute bottom-20 left-16 text-2xl text-yellow-400 opacity-60">✨</div>
+            <div className="absolute top-1/2 right-20 text-xl text-amber-300 opacity-50">✨</div>
+            
+            {/* Stars */}
+            <div className="absolute top-24 left-20 text-2xl text-yellow-400 opacity-65">⭐</div>
+            <div className="absolute bottom-28 right-24 text-xl text-amber-400 opacity-55">⭐</div>
+            <div className="absolute top-1/3 left-12 text-lg text-yellow-300 opacity-45">⭐</div>
+            
+            {/* Small stars */}
+            <div className="absolute top-36 right-16 text-amber-400 opacity-60 text-lg">★</div>
+            <div className="absolute bottom-40 left-24 text-yellow-400 opacity-55 text-base">★</div>
+            <div className="absolute top-1/4 left-1/3 text-amber-300 opacity-45 text-sm">★</div>
+            <div className="absolute bottom-1/4 right-1/3 text-yellow-300 opacity-50 text-lg">★</div>
+            <div className="absolute top-2/3 right-8 text-amber-300 opacity-40 text-sm">★</div>
+            
+            {/* Moons */}
+            <div className="absolute top-12 right-1/4 text-2xl text-amber-200 opacity-50">🌙</div>
+            <div className="absolute bottom-16 left-1/4 text-xl text-yellow-200 opacity-45 -rotate-12">🌙</div>
+            
+            {/* Shooting stars */}
+            <div className="absolute top-28 left-8 text-lg opacity-45">💫</div>
+            <div className="absolute bottom-1/3 right-12 text-xl opacity-50">💫</div>
+            
+            {/* Glitter dots */}
+            <div className="absolute top-32 right-1/4 w-2 h-2 bg-amber-300 rounded-full opacity-60" />
+            <div className="absolute top-44 left-1/4 w-3 h-3 bg-yellow-300 rounded-full opacity-50" />
+            <div className="absolute bottom-36 right-20 w-2.5 h-2.5 bg-amber-200 rounded-full opacity-45" />
+            <div className="absolute bottom-48 left-16 w-2 h-2 bg-yellow-200 rounded-full opacity-55" />
+            <div className="absolute top-1/2 left-1/4 w-1.5 h-1.5 bg-amber-400 rounded-full opacity-50" />
+            
+            {/* Sparkle bursts */}
+            <div className="absolute top-20 left-1/3 text-amber-300 opacity-40">✦</div>
+            <div className="absolute bottom-24 right-1/4 text-yellow-300 opacity-45">✦</div>
+            <div className="absolute top-3/4 left-20 text-amber-200 opacity-35">✧</div>
+            
+            {/* Golden corners */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-amber-200 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-amber-200 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-amber-200 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-amber-200 opacity-50" />
+          </div>
+        )}
+        
+        {/* Style 3: Nature & Adventure */}
+        {decorStyle === 'nature' && (
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Leaves */}
+            <div className="absolute top-16 right-16 text-2xl text-green-500 opacity-50 rotate-45">🍃</div>
+            <div className="absolute bottom-20 left-12 text-xl text-green-400 opacity-45 -rotate-12">🍃</div>
+            <div className="absolute top-1/3 left-8 text-lg text-emerald-400 opacity-40">🌿</div>
+            <div className="absolute bottom-1/3 right-20 text-xl text-green-500 opacity-45">🌿</div>
+            
+            {/* Trees & Plants */}
+            <div className="absolute top-20 left-20 text-2xl opacity-45">🌲</div>
+            <div className="absolute bottom-16 right-16 text-xl opacity-40 rotate-6">🌳</div>
+            <div className="absolute top-2/3 left-12 text-lg opacity-40">🌴</div>
+            
+            {/* Birds */}
+            <div className="absolute top-12 right-1/4 text-xl opacity-50">🐦</div>
+            <div className="absolute bottom-28 left-1/3 text-lg opacity-45 -rotate-12">🕊️</div>
+            <div className="absolute top-1/2 right-8 text-sm opacity-40">🐦</div>
+            
+            {/* Sun & Clouds */}
+            <div className="absolute top-8 left-1/4 text-2xl opacity-50">☀️</div>
+            <div className="absolute top-24 right-28 text-xl opacity-40">☁️</div>
+            <div className="absolute bottom-12 left-16 text-lg opacity-35">☁️</div>
+            
+            {/* Mountains & Nature */}
+            <div className="absolute bottom-24 right-1/4 text-xl opacity-45">⛰️</div>
+            <div className="absolute top-1/4 left-1/4 text-lg opacity-40">🏕️</div>
+            
+            {/* Rainbow */}
+            <div className="absolute top-32 right-12 text-2xl opacity-40">🌈</div>
+            
+            {/* Green dots like dewdrops */}
+            <div className="absolute top-40 left-1/4 w-2.5 h-2.5 bg-green-300 rounded-full opacity-45" />
+            <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-emerald-200 rounded-full opacity-40" />
+            <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-green-200 rounded-full opacity-50" />
+            
+            {/* Green corners */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-green-200 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-green-200 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-green-200 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-green-200 opacity-50" />
+          </div>
+        )}
+        
+        {/* Style 4: Fun Stickers & Doodles */}
+        {decorStyle === 'stickers' && (
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Fun emoji stickers */}
+            <div className="absolute top-16 right-16 text-2xl opacity-55 rotate-12">😎</div>
+            <div className="absolute bottom-20 left-12 text-xl opacity-50 -rotate-6">🎉</div>
+            <div className="absolute top-1/3 left-16 text-2xl opacity-50">🎊</div>
+            <div className="absolute bottom-1/3 right-20 text-xl opacity-45">🥳</div>
+            
+            {/* Music & Fun */}
+            <div className="absolute top-24 left-24 text-xl opacity-50">🎵</div>
+            <div className="absolute bottom-28 right-24 text-lg opacity-45">🎶</div>
+            <div className="absolute top-1/2 right-12 text-xl opacity-45">🎤</div>
+            
+            {/* Cool stickers */}
+            <div className="absolute top-12 right-1/3 text-2xl opacity-50">✌️</div>
+            <div className="absolute bottom-16 left-1/4 text-xl opacity-45">👍</div>
+            <div className="absolute top-2/3 left-8 text-lg opacity-40">💪</div>
+            
+            {/* Fun elements */}
+            <div className="absolute top-20 left-1/4 text-xl opacity-45">🎈</div>
+            <div className="absolute bottom-24 right-1/3 text-2xl opacity-50">🎁</div>
+            <div className="absolute top-1/4 right-12 text-lg opacity-40">🏆</div>
+            
+            {/* Stars & Lightning */}
+            <div className="absolute top-36 right-20 text-xl opacity-50">⚡</div>
+            <div className="absolute bottom-40 left-20 text-lg opacity-45">💥</div>
+            <div className="absolute top-1/2 left-1/3 text-xl opacity-40">🔥</div>
+            
+            {/* Hearts & Love */}
+            <div className="absolute bottom-12 right-16 text-xl opacity-45">💖</div>
+            <div className="absolute top-28 left-12 text-lg opacity-40">💝</div>
+            
+            {/* Colorful confetti */}
+            <div className="absolute top-32 right-1/4 w-3 h-3 bg-blue-300 rounded-full opacity-50" />
+            <div className="absolute top-44 left-1/4 w-2.5 h-2.5 bg-purple-300 rounded-full opacity-45" />
+            <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-teal-200 rounded-full opacity-40" />
+            <div className="absolute bottom-48 left-1/3 w-2 h-2 bg-orange-300 rounded-full opacity-50" />
+            <div className="absolute top-1/2 right-1/4 w-2.5 h-2.5 bg-indigo-200 rounded-full opacity-45" />
+            
+            {/* Colorful washi tape */}
+            <div className="absolute top-8 left-1/4 w-16 h-4 bg-blue-200/60 rotate-[-5deg] rounded-sm" />
+            <div className="absolute bottom-10 right-1/4 w-14 h-3.5 bg-purple-200/50 rotate-[8deg] rounded-sm" />
+            <div className="absolute top-1/3 right-6 w-12 h-3 bg-teal-200/40 rotate-[-12deg] rounded-sm" />
+            
+            {/* Fun corners */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-blue-200 opacity-50" />
+            <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-purple-200 opacity-50" />
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-teal-200 opacity-50" />
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-orange-200 opacity-50" />
+          </div>
+        )}
 
         {content.title && (
           <header className="mb-3 text-center relative z-10">
