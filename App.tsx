@@ -187,6 +187,16 @@ const App: React.FC = () => {
             {/* Decorative Gold Border */}
             <div className="absolute inset-8 border-2 border-[#cfc09f] opacity-30 rounded-r-sm" />
             <div className="absolute inset-10 border border-[#cfc09f] opacity-20 rounded-r-sm" />
+            
+            {/* Top Decorative Ornament */}
+            <div className="absolute top-10 left-0 right-0 flex flex-col items-center">
+               <div className="flex items-center gap-3">
+                  <div className="w-8 h-px bg-[#cfc09f] opacity-50" />
+                  <span className="text-[#cfc09f] opacity-60 text-lg">✦</span>
+                  <div className="w-8 h-px bg-[#cfc09f] opacity-50" />
+               </div>
+               <p className="mt-2 text-[10px] tracking-[0.3em] uppercase text-[#a89880] opacity-60">A Definitive Guide</p>
+            </div>
 
             {/* Title */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
