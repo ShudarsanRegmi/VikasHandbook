@@ -165,15 +165,21 @@ const App: React.FC = () => {
           <div className="relative w-[400px] h-[520px] md:w-[550px] md:h-[700px] bg-[#3e2b2b] rounded-r-lg rounded-l-sm shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-x-2 border-l-4 border-[#2a1d1d]">
             {/* Leather Texture */}
             <div className="absolute inset-0 leather-texture rounded-r-lg opacity-80" />
-            
+
             {/* Decorative Gold Border */}
             <div className="absolute inset-8 border-2 border-[#cfc09f] opacity-30 rounded-r-sm" />
             <div className="absolute inset-10 border border-[#cfc09f] opacity-20 rounded-r-sm" />
 
             {/* Title */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-               <div className="w-20 h-20 mb-8 border-2 border-[#cfc09f] rounded-full flex items-center justify-center opacity-80">
-                  <span className="font-display text-4xl gold-text">V</span>
+               {/* Circular Portrait Image */}
+               <div className="w-24 h-24 md:w-28 md:h-28 mb-6 rounded-full border-2 border-[#cfc09f] overflow-hidden shadow-lg">
+                  <img 
+                    src="/6.jpeg" 
+                    alt="Vikas" 
+                    className="w-full h-full object-cover object-top"
+                    style={{ filter: 'sepia(30%) saturate(80%) brightness(90%)' }}
+                  />
                </div>
                <h1 className="font-display text-4xl md:text-6xl gold-text mb-6 tracking-wider leading-tight">The Vikas<br/>Handbook</h1>
                <div className="w-32 h-0.5 bg-[#cfc09f] opacity-50 mb-6" />
@@ -226,19 +232,23 @@ const App: React.FC = () => {
         {/* Book Container - Same size as cover: 550px × 700px */}
         <div className="relative w-[400px] h-[520px] md:w-[550px] md:h-[700px]" style={{ perspective: '2500px' }}>
           
-          {/* Left Decorative Spine - Positioned outside the main content */}
-          <div className="hidden md:block absolute top-0 bottom-0 -left-[120px] w-[120px] bg-[#f8f5f0] rounded-l-md shadow-2xl border-r border-stone-200 overflow-hidden">
-            <BookTexture />
-            <div className="absolute inset-0 flex items-center justify-center opacity-5">
-              <div className="font-display text-[8rem] text-stone-800 rotate-12">V</div>
+          {/* Left Decorative Spine - Hidden on closing page (back cover) */}
+          {currentPageContent.type !== PageType.CLOSING && (
+            <div className="hidden md:block absolute top-0 bottom-0 -left-[120px] w-[120px] bg-[#f8f5f0] rounded-l-md shadow-2xl border-r border-stone-200 overflow-hidden">
+              <BookTexture />
+              <div className="absolute inset-0 flex items-center justify-center opacity-5">
+                <div className="font-display text-[8rem] text-stone-800 rotate-12">V</div>
+              </div>
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
             </div>
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
-          </div>
+          )}
 
-          {/* Back Cover (Static depth layer) */}
-          <div 
-             className="absolute top-2 left-2 right-2 bottom-2 md:top-4 md:left-0 md:right-0 md:bottom-0 bg-[#e8e6e1] rounded-r-md -z-10 shadow-xl border-r border-stone-300 transform rotate-y-2 origin-left" 
-          />
+          {/* Back Cover (Static depth layer) - Hidden on closing page */}
+          {currentPageContent.type !== PageType.CLOSING && (
+            <div 
+               className="absolute top-2 left-2 right-2 bottom-2 md:top-4 md:left-0 md:right-0 md:bottom-0 bg-[#e8e6e1] rounded-r-md -z-10 shadow-xl border-r border-stone-300 transform rotate-y-2 origin-left" 
+            />
+          )}
           
           {/* Main Content Page - Full 550px × 700px */}
           <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
@@ -277,8 +287,10 @@ const App: React.FC = () => {
              </AnimatePresence>
           </div>
 
-          {/* Book Thickness / Pages Stack (visual only) */}
-          <div className="absolute right-0 top-1 bottom-1 w-2 md:w-5 bg-[#f0eee9] border-l border-stone-200 rounded-r-sm shadow-lg -z-20 translate-x-1 translate-y-1" />
+          {/* Book Thickness / Pages Stack (visual only) - Hidden on closing page */}
+          {currentPageContent.type !== PageType.CLOSING && (
+            <div className="absolute right-0 top-1 bottom-1 w-2 md:w-5 bg-[#f0eee9] border-l border-stone-200 rounded-r-sm shadow-lg -z-20 translate-x-1 translate-y-1" />
+          )}
 
         </div>
 
