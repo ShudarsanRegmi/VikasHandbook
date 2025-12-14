@@ -136,41 +136,70 @@ export const GalleryTemplate: React.FC<{ content: PageContent }> = ({ content })
     
     return (
       <div className="h-full flex flex-col px-4 md:px-8 py-4 md:py-8 relative overflow-hidden">
-        {/* Decorative Background Elements */}
+        {/* Cheerful Scrapbook Decorations */}
         <div className="absolute inset-0 pointer-events-none">
+          
+          {/* Scattered Hearts */}
+          <div className="absolute top-16 right-16 text-2xl text-pink-300 opacity-60 rotate-12">♥</div>
+          <div className="absolute bottom-20 left-12 text-xl text-rose-300 opacity-50 -rotate-6">♥</div>
+          <div className="absolute top-1/3 right-8 text-lg text-pink-200 opacity-40 rotate-[-20deg]">♥</div>
+          
+          {/* Sparkle Stars */}
+          <div className="absolute top-24 left-16 text-2xl text-amber-400 opacity-70">✨</div>
+          <div className="absolute bottom-28 right-14 text-xl text-yellow-400 opacity-60">✨</div>
+          <div className="absolute top-1/2 left-10 text-lg text-amber-300 opacity-50">⭐</div>
+          <div className="absolute bottom-1/3 right-20 text-sm text-yellow-300 opacity-50">✨</div>
+          
+          {/* Decorative Flowers */}
+          <div className="absolute top-20 right-24 text-2xl opacity-50 rotate-12">🌸</div>
+          <div className="absolute bottom-16 left-20 text-xl opacity-45 -rotate-12">🌼</div>
+          <div className="absolute top-2/3 right-12 text-lg opacity-40">🌷</div>
+          
+          {/* Butterflies */}
+          <div className="absolute top-28 left-24 text-xl opacity-50 rotate-[-15deg]">🦋</div>
+          <div className="absolute bottom-24 right-28 text-lg opacity-45 rotate-12">🦋</div>
+          
+          {/* Cute decorative elements */}
+          <div className="absolute top-12 left-1/3 text-lg opacity-40">🎀</div>
+          <div className="absolute bottom-12 right-1/3 text-lg opacity-45 rotate-6">🎀</div>
+          
+          {/* Confetti dots */}
+          <div className="absolute top-32 right-1/4 w-3 h-3 bg-pink-300 rounded-full opacity-50" />
+          <div className="absolute top-40 left-1/4 w-2.5 h-2.5 bg-amber-300 rounded-full opacity-45" />
+          <div className="absolute bottom-36 right-1/3 w-3 h-3 bg-rose-200 rounded-full opacity-40" />
+          <div className="absolute bottom-44 left-1/3 w-2 h-2 bg-yellow-300 rounded-full opacity-50" />
+          <div className="absolute top-1/2 right-1/4 w-2.5 h-2.5 bg-pink-200 rounded-full opacity-45" />
+          <div className="absolute top-2/3 left-20 w-2 h-2 bg-amber-200 rounded-full opacity-40" />
+          
+          {/* Small stars scattered */}
+          <div className="absolute top-36 left-20 text-amber-400 opacity-60 text-sm">★</div>
+          <div className="absolute bottom-40 right-16 text-yellow-400 opacity-55 text-base">★</div>
+          <div className="absolute top-1/4 right-1/3 text-amber-300 opacity-45 text-xs">★</div>
+          <div className="absolute bottom-1/4 left-1/4 text-yellow-300 opacity-50 text-sm">★</div>
+          
+          {/* Washi tape strips */}
+          <div className="absolute top-8 left-1/4 w-16 h-4 bg-pink-200/60 rotate-[-5deg] rounded-sm" />
+          <div className="absolute bottom-10 right-1/4 w-14 h-3.5 bg-amber-200/50 rotate-[8deg] rounded-sm" />
+          <div className="absolute top-1/3 left-8 w-12 h-3 bg-rose-200/40 rotate-[-12deg] rounded-sm" />
+          
+          {/* Decorative swirls */}
+          <svg className="absolute top-16 right-6 w-12 h-12 opacity-30" viewBox="0 0 50 50">
+            <path d="M25 5 Q45 25 25 45 Q5 25 25 5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-pink-400"/>
+          </svg>
+          <svg className="absolute bottom-20 left-6 w-10 h-10 opacity-25 rotate-45" viewBox="0 0 50 50">
+            <path d="M25 5 Q45 25 25 45 Q5 25 25 5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-amber-400"/>
+          </svg>
+          
           {/* Corner Flourishes */}
-          <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-stone-200 opacity-40" />
-          <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-stone-200 opacity-40" />
-          <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-stone-200 opacity-40" />
-          <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-stone-200 opacity-40" />
+          <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-pink-200 opacity-50" />
+          <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-pink-200 opacity-50" />
+          <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-pink-200 opacity-50" />
+          <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-pink-200 opacity-50" />
           
-          {/* Scattered decorative dots */}
-          <div className="absolute top-20 right-12 w-2 h-2 bg-stone-300 rounded-full opacity-30" />
-          <div className="absolute top-32 left-10 w-1.5 h-1.5 bg-stone-300 rounded-full opacity-25" />
-          <div className="absolute bottom-24 right-20 w-2 h-2 bg-stone-300 rounded-full opacity-30" />
-          <div className="absolute bottom-40 left-16 w-1 h-1 bg-stone-400 rounded-full opacity-20" />
-          
-          {/* Subtle diagonal lines */}
-          <svg className="absolute top-12 right-8 w-20 h-20 opacity-10" viewBox="0 0 100 100">
-            <line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" strokeWidth="1" className="text-stone-400"/>
-            <line x1="20" y1="100" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" className="text-stone-400"/>
-          </svg>
-          <svg className="absolute bottom-12 left-8 w-20 h-20 opacity-10" viewBox="0 0 100 100">
-            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" strokeWidth="1" className="text-stone-400"/>
-            <line x1="0" y1="20" x2="80" y2="100" stroke="currentColor" strokeWidth="0.5" className="text-stone-400"/>
-          </svg>
-          
-          {/* Film strip decoration on sides */}
-          <div className="absolute left-1 top-1/4 bottom-1/4 w-3 flex flex-col justify-between opacity-20">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="w-2 h-2 bg-stone-400 rounded-sm" />
-            ))}
-          </div>
-          <div className="absolute right-1 top-1/4 bottom-1/4 w-3 flex flex-col justify-between opacity-20">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="w-2 h-2 bg-stone-400 rounded-sm" />
-            ))}
-          </div>
+          {/* Floating small hearts */}
+          <div className="absolute top-44 right-20 text-rose-300 opacity-40 text-xs">♡</div>
+          <div className="absolute bottom-32 left-28 text-pink-300 opacity-35 text-sm">♡</div>
+          <div className="absolute top-1/2 left-1/3 text-rose-200 opacity-30 text-xs">♡</div>
         </div>
 
         {content.title && (
