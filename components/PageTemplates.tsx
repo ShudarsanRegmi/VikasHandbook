@@ -38,6 +38,15 @@ export const CoverTemplate: React.FC<{ content: PageContent }> = ({ content }) =
 
 // --- Table of Contents ---
 export const TocTemplate: React.FC<{ content: PageContent }> = ({ content }) => {
+    // Page number mapping - accounts for gallery spanning multiple pages
+    const getPageNumber = (idx: number): string => {
+        // Pages: Acknowledgement(2), Core(3), Social(4), Campus(5), Discipline(6), 
+        // Calm(7), Love(8), Humor(9), Aspirations(10), Gallery(11-14), Afterthought(15)
+        if (idx < 9) return String(idx + 2); // Pages 2-10
+        if (idx === 9) return '11-14'; // Gallery spans 4 pages
+        return '15'; // Afterthought
+    };
+    
     return (
         <div className="h-full flex flex-col px-6 md:px-12 py-8 md:py-12">
             <header className="mb-8 text-center border-b-2 border-stone-900 pb-4">
@@ -50,7 +59,7 @@ export const TocTemplate: React.FC<{ content: PageContent }> = ({ content }) => 
                         <li key={idx} className="flex items-baseline justify-between group cursor-default">
                             <span className="relative z-10 bg-[#fdfbf7] pr-2 font-bold">{item}</span>
                             <span className="flex-1 border-b border-dotted border-stone-400 mx-2 opacity-50 relative -top-1"></span>
-                            <span className="relative z-10 bg-[#fdfbf7] pl-2 font-display text-sm text-stone-500">{idx + 2}</span>
+                            <span className="relative z-10 bg-[#fdfbf7] pl-2 font-display text-sm text-stone-500">{getPageNumber(idx)}</span>
                         </li>
                     ))}
                 </ul>
@@ -113,36 +122,183 @@ export const TextTemplate: React.FC<{ content: PageContent }> = ({ content }) =>
 
 // --- Gallery Page ---
 export const GalleryTemplate: React.FC<{ content: PageContent }> = ({ content }) => {
+    const imageCount = content.images?.length || 0;
+    
+    // Determine layout based on number of images
+    const getLayoutClass = () => {
+        if (imageCount === 1) return 'single';
+        if (imageCount === 2) return 'duo';
+        if (imageCount === 3) return 'trio';
+        return 'grid';
+    };
+    
+    const layout = getLayoutClass();
+    
     return (
-      <div className="h-full flex flex-col px-6 md:px-10 py-6 md:py-10">
-        <header className="mb-4 text-center">
-            <h2 className="font-heading text-2xl md:text-3xl text-stone-900">{content.title}</h2>
-            <p className="font-body italic text-stone-500 mt-1 text-sm">{content.subtitle}</p>
-        </header>
+      <div className="h-full flex flex-col px-4 md:px-8 py-4 md:py-8 relative overflow-hidden">
+        {/* Decorative Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Corner Flourishes */}
+          <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-stone-200 opacity-40" />
+          <div className="absolute top-4 right-4 w-16 h-16 border-r-2 border-t-2 border-stone-200 opacity-40" />
+          <div className="absolute bottom-4 left-4 w-16 h-16 border-l-2 border-b-2 border-stone-200 opacity-40" />
+          <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-stone-200 opacity-40" />
+          
+          {/* Scattered decorative dots */}
+          <div className="absolute top-20 right-12 w-2 h-2 bg-stone-300 rounded-full opacity-30" />
+          <div className="absolute top-32 left-10 w-1.5 h-1.5 bg-stone-300 rounded-full opacity-25" />
+          <div className="absolute bottom-24 right-20 w-2 h-2 bg-stone-300 rounded-full opacity-30" />
+          <div className="absolute bottom-40 left-16 w-1 h-1 bg-stone-400 rounded-full opacity-20" />
+          
+          {/* Subtle diagonal lines */}
+          <svg className="absolute top-12 right-8 w-20 h-20 opacity-10" viewBox="0 0 100 100">
+            <line x1="0" y1="100" x2="100" y2="0" stroke="currentColor" strokeWidth="1" className="text-stone-400"/>
+            <line x1="20" y1="100" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" className="text-stone-400"/>
+          </svg>
+          <svg className="absolute bottom-12 left-8 w-20 h-20 opacity-10" viewBox="0 0 100 100">
+            <line x1="0" y1="0" x2="100" y2="100" stroke="currentColor" strokeWidth="1" className="text-stone-400"/>
+            <line x1="0" y1="20" x2="80" y2="100" stroke="currentColor" strokeWidth="0.5" className="text-stone-400"/>
+          </svg>
+          
+          {/* Film strip decoration on sides */}
+          <div className="absolute left-1 top-1/4 bottom-1/4 w-3 flex flex-col justify-between opacity-20">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="w-2 h-2 bg-stone-400 rounded-sm" />
+            ))}
+          </div>
+          <div className="absolute right-1 top-1/4 bottom-1/4 w-3 flex flex-col justify-between opacity-20">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="w-2 h-2 bg-stone-400 rounded-sm" />
+            ))}
+          </div>
+        </div>
 
-        <div className="flex-1 grid grid-cols-2 gap-4 auto-rows-min content-start p-2 overflow-y-auto no-scrollbar">
-            {content.images?.map((src, idx) => (
+        {content.title && (
+          <header className="mb-3 text-center relative z-10">
+              <h2 className="font-heading text-xl md:text-2xl text-stone-900">{content.title}</h2>
+              {content.subtitle && <p className="font-body italic text-stone-500 mt-1 text-xs md:text-sm">{content.subtitle}</p>}
+          </header>
+        )}
+
+        {/* Single large image layout */}
+        {layout === 'single' && content.images && (
+          <div className="flex-1 flex items-center justify-center p-2 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="relative p-3 bg-white shadow-lg border border-stone-100 rotate-1 max-w-full max-h-full"
+            >
+              {/* Tape effect on corners */}
+              <div className="absolute -top-2 left-1/4 w-12 h-4 bg-amber-100/60 rotate-[-8deg] shadow-sm" />
+              <div className="absolute -top-2 right-1/4 w-10 h-4 bg-amber-100/60 rotate-[5deg] shadow-sm" />
+              <img 
+                src={content.images[0]} 
+                alt="Memory" 
+                className="max-h-[420px] w-auto object-contain grayscale-[15%] hover:grayscale-0 transition-all duration-500"
+              />
+              {/* Photo caption line */}
+              <div className="mt-2 text-center">
+                <div className="h-px w-16 bg-stone-200 mx-auto" />
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* Two image layout - side by side or stacked */}
+        {layout === 'duo' && content.images && (
+          <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-4 p-2 relative z-10">
+            {content.images.map((src, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 * idx, duration: 0.5 }}
+                className={`relative p-2 bg-white shadow-lg border border-stone-100 ${idx === 0 ? '-rotate-2' : 'rotate-2'}`}
+              >
+                {/* Tape effect */}
+                <div className={`absolute -top-2 ${idx === 0 ? 'left-1/3' : 'right-1/3'} w-10 h-3 bg-amber-100/60 ${idx === 0 ? 'rotate-[-5deg]' : 'rotate-[5deg]'} shadow-sm`} />
+                <img 
+                  src={src} 
+                  alt="Memory" 
+                  className="max-h-[260px] md:max-h-[340px] w-auto object-contain grayscale-[15%] hover:grayscale-0 transition-all duration-500"
+                />
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Three image collage layout */}
+        {layout === 'trio' && content.images && (
+          <div className="flex-1 flex items-center justify-center p-2 relative z-10">
+            <div className="relative w-full max-w-[500px]">
+              {/* Large image on left */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-white shadow-lg border border-stone-100 -rotate-3 z-10"
+              >
+                <div className="absolute -top-2 left-1/4 w-10 h-3 bg-amber-100/60 rotate-[-5deg] shadow-sm" />
+                <img 
+                  src={content.images[0]} 
+                  alt="Memory" 
+                  className="max-h-[300px] w-auto object-contain grayscale-[15%] hover:grayscale-0 transition-all duration-500"
+                />
+              </motion.div>
+              {/* Two smaller images stacked on right */}
+              <div className="ml-auto w-1/2 flex flex-col gap-3">
+                {content.images.slice(1).map((src, idx) => (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + 0.1 * idx, duration: 0.5 }}
+                    className={`relative p-2 bg-white shadow-lg border border-stone-100 ${idx === 0 ? 'rotate-2' : '-rotate-1'}`}
+                  >
+                    <img 
+                      src={src} 
+                      alt="Memory" 
+                      className="max-h-[140px] w-auto object-contain grayscale-[15%] hover:grayscale-0 transition-all duration-500"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Grid layout for 4+ images */}
+        {layout === 'grid' && content.images && (
+          <div className="flex-1 grid grid-cols-2 gap-3 auto-rows-min content-start p-2 overflow-y-auto no-scrollbar relative z-10">
+            {content.images.map((src, idx) => (
                 <motion.div 
                     key={idx}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * idx }}
-                    className={`relative p-2 bg-white shadow-md border border-stone-100 ${idx % 2 !== 0 ? 'rotate-2 mt-4' : '-rotate-1'}`}
+                    className={`relative p-2 bg-white shadow-md border border-stone-100 ${idx % 2 !== 0 ? 'rotate-1 mt-2' : '-rotate-1'}`}
                 >
-                    <div className="aspect-[3/4] overflow-hidden bg-stone-100 relative grayscale-[20%] hover:grayscale-0 transition-all duration-500">
-                        <img src={src} alt="Memory" className="w-full h-full object-cover" />
-                    </div>
+                    <div className={`absolute -top-1.5 ${idx % 2 === 0 ? 'left-1/4' : 'right-1/4'} w-8 h-2.5 bg-amber-100/60 ${idx % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[3deg]'} shadow-sm`} />
+                    <img 
+                      src={src} 
+                      alt="Memory" 
+                      className="max-h-[180px] w-full object-contain grayscale-[15%] hover:grayscale-0 transition-all duration-500"
+                    />
                 </motion.div>
             ))}
-        </div>
+          </div>
+        )}
 
-        <div className="mt-4 text-center">
-            <ul className="inline-flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-body text-stone-600 italic">
-                {content.listItems?.map((item, idx) => (
-                    <li key={idx}>• {item}</li>
-                ))}
-            </ul>
-        </div>
+        {content.listItems && content.listItems.length > 0 && (
+          <div className="mt-3 text-center relative z-10">
+              <ul className="inline-flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-body text-stone-600 italic">
+                  {content.listItems.map((item, idx) => (
+                      <li key={idx}>• {item}</li>
+                  ))}
+              </ul>
+          </div>
+        )}
       </div>
     );
 };

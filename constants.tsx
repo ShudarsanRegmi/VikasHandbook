@@ -29,8 +29,7 @@ export const BOOK_PAGES: PageContent[] = [
         'Sense of Humor',
         'Future Aspirations',
         'Gallery',
-        'A Quiet Afterthought',
-        'The End'
+        'A Quiet Afterthought'
     ]
   },
   {
@@ -149,18 +148,37 @@ export const BOOK_PAGES: PageContent[] = [
     quote: 'The kind of admin you trust with both servers and secrets.'
   },
   {
-    id: 'gallery',
+    id: 'gallery-1',
     type: PageType.GALLERY,
     title: 'Gallery',
     subtitle: 'Because some things are better shown than explained.',
     images: [
-      'https://i.ibb.co/bg1vb6hH/1.png',
-      'https://i.ibb.co/JRzPj9RG/2.png',
-      'https://i.ibb.co/Ts4XV4v/3.jpg',
-      'https://i.ibb.co/Rp8vmY7M/3.png'
+      '/6.jpeg'
+    ]
+  },
+  {
+    id: 'gallery-2',
+    type: PageType.GALLERY,
+    images: [
+      '/2.jpeg',
+      '/3.jpeg'
+    ]
+  },
+  {
+    id: 'gallery-3',
+    type: PageType.GALLERY,
+    images: [
+      '/4.jpeg',
+      '/5.jpeg'
+    ]
+  },
+  {
+    id: 'gallery-4',
+    type: PageType.GALLERY,
+    images: [
+      '/7.jpeg'
     ],
     listItems: [
-      'A few memorable pictures',
       'Campus moments',
       'Simple smiles',
       'Unfiltered memories'
