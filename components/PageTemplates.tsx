@@ -511,20 +511,15 @@ export const GalleryTemplate: React.FC<{ content: PageContent }> = ({ content })
 export const BackCoverTemplate: React.FC<{ content: PageContent }> = ({ content }) => {
     return (
         <div className="h-full flex flex-col justify-center px-6 md:px-12 py-8 relative overflow-y-auto no-scrollbar">
-            <div className="absolute top-0 right-0 p-6 opacity-20">
-                <Quote className="w-16 h-16 text-stone-900" />
+            {/* Decorative Quote Icon - positioned to not overlap */}
+            <div className="absolute top-4 right-4 opacity-15">
+                <Quote className="w-12 h-12 text-stone-400" />
             </div>
-
+            
             <h2 className="font-heading text-2xl md:text-3xl mb-6 text-stone-800">{content.title}</h2>
             
             <div className="font-body text-base md:text-lg leading-loose text-stone-700 text-justify">
                 {content.body}
-            </div>
-
-            <div className="mt-16 flex justify-center">
-                <div className="w-12 h-12 rounded-full border border-stone-400 flex items-center justify-center text-stone-400 text-xs">
-                    ...
-                </div>
             </div>
         </div>
     );

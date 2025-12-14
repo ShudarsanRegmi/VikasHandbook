@@ -10,7 +10,7 @@ export const BOOK_PAGES: PageContent[] = [
     body: (
       <>
         <div className="text-center mt-4 text-stone-600 text-sm tracking-widest uppercase">Volume 1</div>
-        <div className="text-center mt-1 text-stone-500 text-xs italic">Version History: Friendship since 2023</div>
+        <div className="text-center mt-1 text-stone-500 text-xs italic">Published on 2025</div>
       </>
     )
   },
