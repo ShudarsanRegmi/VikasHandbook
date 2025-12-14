@@ -161,8 +161,8 @@ const App: React.FC = () => {
           className="relative group cursor-pointer perspective-[1000px]"
           onClick={handleOpenBook}
         >
-          {/* The Book Cover Object - Wider and more squat */}
-          <div className="relative w-[400px] h-[460px] md:w-[600px] md:h-[600px] bg-[#3e2b2b] rounded-r-lg rounded-l-sm shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-x-2 border-l-4 border-[#2a1d1d]">
+          {/* The Book Cover Object - Sized to match a single page width */}
+          <div className="relative w-[400px] h-[520px] md:w-[550px] md:h-[700px] bg-[#3e2b2b] rounded-r-lg rounded-l-sm shadow-2xl transform transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-x-2 border-l-4 border-[#2a1d1d]">
             {/* Leather Texture */}
             <div className="absolute inset-0 leather-texture rounded-r-lg opacity-80" />
             
@@ -199,10 +199,12 @@ const App: React.FC = () => {
   }
 
   // Left column width (Spine side)
-  const LEFT_COL_WIDTH = "320px";
+  const LEFT_COL_WIDTH = "180px";
+  // Right content page width - matches cover page
+  const RIGHT_PAGE_WIDTH = "670px";
 
   return (
-    <div className="min-h-screen w-full bg-[#151515] flex items-center justify-center p-4 md:p-8 overflow-hidden relative">
+    <div className="min-h-screen w-full bg-[#151515] flex items-center justify-center p-2 md:p-4 overflow-hidden relative">
       
       {/* Wooden Desk Texture */}
       <div className="absolute inset-0 opacity-40 pointer-events-none bg-stone-900" 
@@ -210,42 +212,47 @@ const App: React.FC = () => {
       </div>
       <div className="absolute inset-0 bg-radial-gradient from-transparent to-black opacity-80 pointer-events-none" />
 
-      <div className="relative z-10 w-full flex flex-col items-center justify-center h-full">
+      <div className="relative z-10 w-full flex items-center justify-center h-full">
         
-        {/* 3D Book Container - Asymmetrical Layout */}
-        <div className="relative w-full max-w-[700px] aspect-[4/3] md:aspect-auto md:w-[1450px] md:h-[680px]" style={{ perspective: '2500px' }}>
+        {/* Left Navigation Button */}
+        <button 
+          onClick={handlePrev} 
+          title={pageIndex === 0 ? "Close Book" : "Previous Page"}
+          className="hidden md:flex p-3 rounded-full hover:bg-white/10 hover:text-white transition-all cursor-pointer text-stone-400 mr-6"
+        >
+          {pageIndex === 0 ? <X size={32} /> : <ChevronLeft size={32} />}
+        </button>
+
+        {/* Book Container - Same size as cover: 550px × 700px */}
+        <div className="relative w-[400px] h-[520px] md:w-[550px] md:h-[700px]" style={{ perspective: '2500px' }}>
           
-          {/* Back Cover (Static depth layer) - Adjusted to match new right-page width */}
+          {/* Left Decorative Spine - Positioned outside the main content */}
+          <div className="hidden md:block absolute top-0 bottom-0 -left-[120px] w-[120px] bg-[#f8f5f0] rounded-l-md shadow-2xl border-r border-stone-200 overflow-hidden">
+            <BookTexture />
+            <div className="absolute inset-0 flex items-center justify-center opacity-5">
+              <div className="font-display text-[8rem] text-stone-800 rotate-12">V</div>
+            </div>
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
+          </div>
+
+          {/* Back Cover (Static depth layer) */}
           <div 
-             className="absolute top-2 left-2 right-2 bottom-2 md:top-4 md:left-[320px] md:right-0 md:bottom-0 bg-[#e8e6e1] rounded-r-md -z-10 shadow-xl border-r border-stone-300 md:block hidden transform rotate-y-2 origin-left" 
+             className="absolute top-2 left-2 right-2 bottom-2 md:top-4 md:left-0 md:right-0 md:bottom-0 bg-[#e8e6e1] rounded-r-md -z-10 shadow-xl border-r border-stone-300 transform rotate-y-2 origin-left" 
           />
           
-          {/* Main Flipping Area */}
-          <div className="relative w-full h-full md:flex">
-             
-             {/* Left Page (Spine / Decorative / Previous Pages) - Fixed narrow width */}
-             <div className="hidden md:block shrink-0 bg-[#f8f5f0] rounded-l-md shadow-2xl relative border-r border-stone-200 overflow-hidden" style={{ width: LEFT_COL_WIDTH }}>
-                <BookTexture />
-                {/* Visual content for left page - decorative */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-5">
-                    <div className="font-display text-[10rem] text-stone-800 rotate-12">V</div>
-                </div>
-                <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
-             </div>
-
-             {/* Right Page (Active Content) - Takes remaining width */}
-             <div className="flex-1 relative h-full perspective-origin-left" style={{ transformStyle: 'preserve-3d' }}>
-                <AnimatePresence initial={false} custom={direction} mode="popLayout">
-                    <motion.div
-                    key={pageIndex}
-                    custom={direction}
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    style={{ transformOrigin: 'left center' }}
-                    className="absolute inset-0 w-full h-full bg-[#fdfbf7] rounded-r-md rounded-l-sm shadow-2xl overflow-hidden origin-left backface-hidden"
-                    >
+          {/* Main Content Page - Full 550px × 700px */}
+          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+             <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                 <motion.div
+                 key={pageIndex}
+                 custom={direction}
+                 variants={variants}
+                 initial="enter"
+                 animate="center"
+                 exit="exit"
+                 style={{ transformOrigin: 'left center' }}
+                 className="absolute inset-0 w-full h-full bg-[#fdfbf7] rounded-r-md rounded-l-sm shadow-2xl overflow-hidden origin-left backface-hidden"
+                 >
                         {/* Lighting Glare */}
                         <LightingOverlay direction={direction} />
                         
@@ -266,10 +273,8 @@ const App: React.FC = () => {
                                 {pageIndex}
                             </div>
                         )}
-                    </motion.div>
-                </AnimatePresence>
-             </div>
-
+                 </motion.div>
+             </AnimatePresence>
           </div>
 
           {/* Book Thickness / Pages Stack (visual only) */}
@@ -277,31 +282,40 @@ const App: React.FC = () => {
 
         </div>
 
-        {/* Controls */}
-        <div className="mt-8 flex items-center gap-12 text-stone-400 z-50">
-           {/* Previous Button - Always enabled to allow closing the book */}
-           <button 
-             onClick={handlePrev} 
-             title={pageIndex === 0 ? "Close Book" : "Previous Page"}
-             className="p-3 rounded-full hover:bg-white/10 hover:text-white transition-all cursor-pointer"
-            >
-             {pageIndex === 0 ? <X size={32} /> : <ChevronLeft size={32} />}
-           </button>
+        {/* Right Navigation Button */}
+        <button 
+          onClick={handleNext} 
+          disabled={pageIndex === totalPages - 1}
+          title="Next Page"
+          className="hidden md:flex p-3 rounded-full hover:bg-white/10 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer text-stone-400 ml-6"
+        >
+          <ChevronRight size={32} />
+        </button>
 
-           <div className="font-display text-xs tracking-[0.2em] opacity-50 select-none">
-              {pageIndex === 0 ? 'COVER' : `${pageIndex} / ${totalPages - 1}`}
-           </div>
+      </div>
 
-           <button 
-             onClick={handleNext} 
-             disabled={pageIndex === totalPages - 1}
-             title="Next Page"
-             className="p-3 rounded-full hover:bg-white/10 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
-            >
-             <ChevronRight size={32} />
-           </button>
-        </div>
+      {/* Mobile Controls - Bottom */}
+      <div className="md:hidden fixed bottom-6 left-0 right-0 flex items-center justify-center gap-12 text-stone-400 z-50">
+         <button 
+           onClick={handlePrev} 
+           title={pageIndex === 0 ? "Close Book" : "Previous Page"}
+           className="p-3 rounded-full hover:bg-white/10 hover:text-white transition-all cursor-pointer"
+          >
+           {pageIndex === 0 ? <X size={32} /> : <ChevronLeft size={32} />}
+         </button>
 
+         <div className="font-display text-xs tracking-[0.2em] opacity-50 select-none">
+            {pageIndex === 0 ? 'COVER' : `${pageIndex} / ${totalPages - 1}`}
+         </div>
+
+         <button 
+           onClick={handleNext} 
+           disabled={pageIndex === totalPages - 1}
+           title="Next Page"
+           className="p-3 rounded-full hover:bg-white/10 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+          >
+           <ChevronRight size={32} />
+         </button>
       </div>
     </div>
   );
